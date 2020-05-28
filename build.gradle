@@ -19,8 +19,16 @@ repositories {
         name 'bungeecord-repo'
         url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
+
+    maven {
+        name 'vault-repo'
+        url 'https://jitpack.io'
+    }
+
 }
 
 dependencies {
     compile 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
+
+    compile "com.github.MilkBowl:VaultAPI:1.7"
 }

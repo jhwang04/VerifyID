@@ -46,12 +46,28 @@ public class VerifyCommand implements CommandExecutor {
                     classOf = (posOne * 10 + posTwo) + 4;
                     if(classOf >= 12 && classOf <= 25 && posThree <= 3) {
                         commandSender.sendMessage(ChatColor.GREEN + "Verified! Class of 20" + classOf);
-                        ((Player) commandSender).setDisplayName(ChatColor.RED + "[20" + classOf + "] " + ChatColor.WHITE + commandSender.getName());
-                        ((Player) commandSender).setPlayerListName(ChatColor.RED + "[20" + classOf + "] " + ChatColor.WHITE + commandSender.getName());
+                        String prefix = "[20" + classOf + "]";
+
+                        //((Player) commandSender).setDisplayName(ChatColor.RED + "[20" + classOf + "] " + ChatColor.WHITE + commandSender.getName());
+                        //((Player) commandSender).setPlayerListName(ChatColor.RED + "[20" + classOf + "] " + ChatColor.WHITE + commandSender.getName());
 
                         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                         String perm = "lp user " + commandSender.getName() + " parent add student";
+                        String removePrefix = "lp user " + commandSender.getName() + " meta removePrefix 1";
+                        String addPrefix = "lp user " + commandSender.getName() + " meta addprefix 1 \"&2" + prefix + "\"";
                         Bukkit.dispatchCommand(console, perm);
+                        Bukkit.dispatchCommand(console, removePrefix);
+                        Bukkit.dispatchCommand(console, addPrefix);
+
+                        plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+                            @Override
+                            public void run() {
+                                String playerPrefix = plugin.getChat().getPlayerPrefix(p.getPlayer()) + " ";
+                                p.setDisplayName(playerPrefix + ChatColor.GREEN + p.getName());
+                                p.setPlayerListName(ChatColor.DARK_GREEN + playerPrefix.substring(2) + ChatColor.GREEN + p.getName());
+                            }
+                        }, 1);
+
                     } else {
                         sendError(commandSender, false);
                     }

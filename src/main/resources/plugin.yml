@@ -1,0 +1,9 @@
+name: VerifyID
+main: com.justinhwang.verifyid.VerifyID
+version: 1.0.0
+api-version: 1.15
+depend:
+  - LuckPerms
+commands:
+  verify:
+    description: Allow the user to verify their student ID

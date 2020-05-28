@@ -41,8 +41,6 @@ public class VerifyCommand implements CommandExecutor {
                 int posTwo = num/10 - (10 * (num/100));
                 int posThree = num - (10 * (num/10));
 
-                commandSender.sendMessage("num = " + posZero + posOne + posTwo + posThree);
-
                 if(posZero == 5) {
                     int classOf = -1;
                     classOf = (posOne * 10 + posTwo) + 4;
